@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+ {% block body %}
+{#     <h1>Première page web avec Symfony</h1>#}
+     <div class="container">
+{#         <pre>#}
+{#    {{ dump(category) }}#}
+{#</pre>#}
+         {% for categories in category %}
+             <h2>{{ categories.name }}</h2>
+         {% endfor %}
+     </div>
+
+ {% endblock %}
