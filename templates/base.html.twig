@@ -27,9 +27,9 @@
                             <a class="nav-link active" aria-current="page" href="#">Accueil</a>
                         </li>
 
-                            {% for categories in category %}
+                            {% for cat in categories %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/categories/{{ categories.name }}">{{ categories.name }}</a>
+                            <a class="nav-link" href="/categories/{{ cat.name }}">{{ cat.name }}</a>
                         </li>
                         {% endfor %}
 
