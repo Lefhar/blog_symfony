@@ -15,6 +15,8 @@ class ArticlesController extends AbstractController
         // affichage de la page d'accueil
         $repo = $this->getDoctrine()->getRepository(Articles::class);
         $articles = $repo->findAll();
+
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'ArticlesController',
             'articles'=> $articles

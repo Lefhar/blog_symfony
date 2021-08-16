@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Articles;
 use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,18 @@ class CategoriesController extends  AbstractController
     {
         // affichage de la page categorie
         $repo = $this->getDoctrine()->getRepository(Category::class);
-        $category = $repo->findBy(['name'=>$request]);
+        $repoart = $this->getDoctrine()->getRepository(Articles::class);
+        $article = $repoart->findByExampleField($request);
+//        $em = $this->getDoctrine()->getManager();
+//        $qb = $em->createQuery('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=:cate')
+//            ->setParameter('cate', $request)
+//            ->getResult()
+//        ;
+
         $categories = $repo->findAll();
         return $this->render('categories/index.html.twig', [
             'controller_name' => 'CategoriesController',
-            'category'=> $category,
+            'post'=> $article,
             'categories'=> $categories
         ]);
     }
