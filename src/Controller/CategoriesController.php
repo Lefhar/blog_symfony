@@ -10,15 +10,20 @@ use Symfony\Component\HttpFoundation\Request;
 class CategoriesController extends  AbstractController
 {
     /**
-     * @Route("/categories/{slug}", name="category")
+     * @Route("/categories/{name}", name="category")
      */
-    public function index(Request $request): Response
+    public function index(string $name): Response
     {
+        echo $name;
         // affichage de la page categorie
         $repo = $this->getDoctrine()->getRepository(Category::class);
         $repoart = $this->getDoctrine()->getRepository(Articles::class);
+//print_r($request->attributes->get('articles'));
+//        $routeName = $request->attributes->get('_route');
+    //    $routeParameters = $request->attributes->get('_route_params');
 
-        $article = $repoart->findByExampleField($request->attributes->get('slug','spoiler'));
+    //    var_dump($routeName);
+        $article = $repoart->findByExampleField($name);
 //        $em = $this->getDoctrine()->getManager();
 //        $qb = $em->createQuery('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=:cate')
 //            ->setParameter('cate', $request)
