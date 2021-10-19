@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Articles;
 
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,14 +40,15 @@ class ArticlesRepository extends ServiceEntityRepository
     public function findByExampleField($value): array
     {
         $db = $this->getEntityManager()->getConnection();
-//        return $this->createQueryBuilder('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=:cate')
-//            ->setParameter('cate', $value)
-$stmt = $db->prepare('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=?');
-$stmt->execute(array($value));
+      //  return $this->createQueryBuilder('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=:cate')
+         //   ->setParameter('cate', $value);
+        return $this->createQueryBuilder('c')->from('App\Entity\Articles','art')
+            ->join('App\Entity\Category','cat','cat.id = art.articles_id')->where('cat.name=:cate')->setParameter('cate', $value)->getQuery()->getResult();
 
-return $stmt->fetchAll();
-
-
+//        $stmt = $db->prepare('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=?');
+//        $stmt->execute(array($value));
+//
+//        return $stmt->fetchAll();
 
 
     }
