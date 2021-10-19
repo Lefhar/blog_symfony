@@ -2,11 +2,12 @@
  {% block body %}
 {#     <h1>Première page web avec Symfony</h1>#}
      <div class="container">
-         <pre>
-    {{ dump(post) }}
-</pre>
+{#         <pre>#}
+{#    {{ dump(post) }}#}
+{#</pre>#}
          {% for categories in post %}
-             <h2>{{ categories.name }}</h2>
+             <h2>{{ categories.title }}</h2>
+             <pre>{{ categories.description }}</pre>
          {% endfor %}
      </div>
 

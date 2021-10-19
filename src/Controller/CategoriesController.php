@@ -18,10 +18,7 @@ class CategoriesController extends  AbstractController
         $repo = $this->getDoctrine()->getRepository(Category::class);
         $repoart = $this->getDoctrine()->getRepository(Articles::class);
 
-        $requests = Request::createFromGlobals();
- echo 'categorie'.$requests->attributes->get('slug','spoiler');
- var_dump($request);
-        $article = $repoart->findByExampleField($requests->attributes->get('slug','spoiler'));
+        $article = $repoart->findByExampleField($request->attributes->get('slug','spoiler'));
 //        $em = $this->getDoctrine()->getManager();
 //        $qb = $em->createQuery('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=:cate')
 //            ->setParameter('cate', $request)
