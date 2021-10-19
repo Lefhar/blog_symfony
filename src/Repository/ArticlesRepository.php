@@ -6,6 +6,9 @@ use App\Entity\Articles;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
+use Doctrine\ORM\Query\Expr\Join;
+
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,11 +42,18 @@ class ArticlesRepository extends ServiceEntityRepository
     */
     public function findByExampleField($value): array
     {
-        $db = $this->getEntityManager()->getConnection();
-      //  return $this->createQueryBuilder('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=:cate')
-         //   ->setParameter('cate', $value);
+        $this->getEntityManager()->getConnection();
+        $entityManager = $this->getEntityManager();
+
+//        $query = $entityManager->createQuery(
+//            'SELECT art,cat FROM App\Entity\Articles art  JOIN App\Entity\Category cat
+//            ON cat.id = art.articles_id where cat.name=:cate'
+//        )->setParameter('cate', $value);
+//
+//        return $query->getResult();
         return $this->createQueryBuilder('c')->from('App\Entity\Articles','art')
-            ->join('App\Entity\Category','cat','cat.id = art.articles_id')->where('cat.name=:cate')->setParameter('cate', $value)->getQuery()->getResult();
+            ->join('App\Entity\Category','cat',Join::WITH,'cat.id=art.articles_id')
+            ->where(' cat.name=:cate')->setParameter('cate', $value)->getQuery()->getResult();
 
 //        $stmt = $db->prepare('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=?');
 //        $stmt->execute(array($value));
