@@ -14,8 +14,7 @@ class CategoriesController extends  AbstractController
      */
     public function index(string $name): Response
     {
-        echo $name;
-        // affichage de la page categorie
+
         $repo = $this->getDoctrine()->getRepository(Category::class);
         $repoart = $this->getDoctrine()->getRepository(Articles::class);
 //print_r($request->attributes->get('articles'));
