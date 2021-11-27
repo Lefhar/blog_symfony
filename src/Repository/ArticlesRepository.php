@@ -51,8 +51,8 @@ class ArticlesRepository extends ServiceEntityRepository
 //        )->setParameter('cate', $value);
 //
 //        return $query->getResult();
-        return $this->createQueryBuilder('art')->select('art.title','art.articles_id')
-            ->join('App\Entity\Category','cat',Join::WITH,'cat.id=art.articles_id')
+        return $this->createQueryBuilder('art')
+            ->join(Category::class,'cat',Join::WITH,'cat.id=art.articles')
             ->where(' cat.name=:cate')->setParameter('cate', $value)->getQuery()->getResult();
 
 //        $stmt = $db->prepare('SELECT * FROM articles art  JOIN category cat on cat.id = art.articles_id where cat.name=?');
